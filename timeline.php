@@ -1,0 +1,4 @@
+<?php require 'includes/auth.php'; require_login(); include 'config/db.php'; include 'includes/layout.php'; include 'includes/status_helper.php';
+$res=$conn->query('SELECT l.*, d.door_name FROM event_logs l LEFT JOIN doors d ON d.id=l.door_id ORDER BY l.event_time DESC LIMIT 80'); header_html('Timeline'); ?>
+<h2>Incident Timeline Reconstruction</h2><p class="small-muted">Shows how the incident happened and when it happened.</p><div class="card p-4"><div class="timeline"><?php while($r=$res->fetch_assoc()): ?><div class="timeline-item"><b><?=h($r['event_time'])?> - <?=h($r['event_type'])?></b> <?=status_badge($r['result'],$r['event_type'],$r['integrity_status'])?><br><?=h($r['door_name'].' / '.$r['device_id'])?> by <?=h($r['actor_name'])?> → <span class="badge badge-sev-<?=h($r['severity'])?>"><?=h($r['severity'])?></span><br><span class="small-muted"><?=h($r['reason'])?></span></div><?php endwhile; ?></div></div>
+<?php footer_html(); ?>

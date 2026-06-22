@@ -1,0 +1,28 @@
+[
+  {
+    "id": "inject_access",
+    "type": "inject",
+    "z": "flow1",
+    "name": "Simulate RFID+Keypad Access",
+    "props": [{"p":"payload"}],
+    "payload": "{\"device_id\":\"DOOR-01\",\"rfid_uid\":\"STAFF001\",\"pin_code\":\"111111\",\"event_type\":\"ACCESS_ATTEMPT\"}",
+    "payloadType": "json",
+    "x": 170,
+    "y": 100,
+    "wires": [["http_post"]]
+  },
+  {
+    "id": "http_post",
+    "type": "http request",
+    "z": "flow1",
+    "name": "POST to PHP API",
+    "method": "POST",
+    "ret": "txt",
+    "paytoqs": "ignore",
+    "url": "http://localhost/iot_forensic_system/api_log.php",
+    "x": 430,
+    "y": 100,
+    "wires": [["debug_response"]]
+  },
+  {"id":"debug_response","type":"debug","z":"flow1","name":"API Response","active":true,"tosidebar":true,"complete":"payload","x":650,"y":100,"wires":[]}
+]
