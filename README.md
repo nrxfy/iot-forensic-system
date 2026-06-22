@@ -1,5 +1,5 @@
 # iot-forensic-system
-IoT Device Behavior Logging and ForensicvSystem - FYP
+IoT Device Behavior Logging and Forensic System - FYP
 
 # IoT Device Behavior Logging and Forensic System
 
